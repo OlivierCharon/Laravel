@@ -36,7 +36,6 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-
             <div class="collapse navbar-collapse justify-content-center" id="navbarResponsive">
                 <ul class="navbar-nav m-auto">
 
@@ -44,12 +43,8 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
-                        @if (Route::has('register'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                            </li>
-                        @endif
                     @else
+
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -69,30 +64,89 @@
                                 </form>
                             </div>
                         </li>
+
+                        @if(Auth::user()->right->name == 'admin')
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('register') }}</a>
+                                </li>
+                            @endif
+                        @endif
                     @endguest
                 </ul>
-                <ul class="navbar-nav">
-                    <div class="d-flex">
+                <div class="d-flex">
+                    <ul class="navbar-nav">
+
                         <li class="nav-item active">
                             <a class="nav-link" href="/">Home
                                 <span class="sr-only">(current)</span>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/ideas">Ideas</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/new">New idea</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('show-books') }}">Show book</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('create-books')  }}">New book</a>
+
+                        {{-- Animals --}}
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                Animals <span class="caret"></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('show-animals') }}">
+                                    See all
+                                </a>
+                                @auth
+                                    @if(Auth::user()->right->name == 'Admin')
+                                        <a class="dropdown-item" href="{{ route('create-animals')  }}">
+                                            New animal
+                                        </a>
+                                    @endif
+                                @endauth
+                            </div>
                         </li>
 
-                    </div>
-                </ul>
+                        {{-- Races --}}
+                        @auth
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Races <span class="caret"></span>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('show-races') }}">
+                                        See all
+                                    </a>
+                                    @if(Auth::user()->right->name == 'Admin')
+                                        <a class="dropdown-item" href="{{ route('create-races')  }}">
+                                            New race
+                                        </a>
+                                    @endif
+                                </div>
+                            </li>
+                        @endauth
+
+                        {{-- Users --}}
+                        @auth
+                            @if(Auth::user()->right->name == 'Admin')
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        Users <span class="caret"></span>
+                                    </a>
+
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{ route('show-users') }}">
+                                            See all
+                                        </a>
+
+                                        <a class="dropdown-item" href="{{ route('create-users')  }}">
+                                            New user
+                                        </a>
+                                    </div>
+                                </li>
+                            @endif
+                        @endauth
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>
@@ -104,7 +158,10 @@
     <!-- Footer -->
     <footer class="py-5 bg-dark">
         <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; <a id="footer-github" href="https://github.com/OlivierCharon" target="_blank" class="text-light"> Olivier CHARON </a> - 2019</p>
+            <p class="m-0 text-center text-white">Copyright &copy; <a id="footer-github"
+                                                                      href="https://github.com/OlivierCharon"
+                                                                      target="_blank" class="text-light"> Olivier
+                    CHARON </a> - 2019</p>
         </div>
         <!-- /.container -->
     </footer>
@@ -120,7 +177,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-
 
 
 </body>

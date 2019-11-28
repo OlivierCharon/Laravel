@@ -3,7 +3,7 @@
 
     <h1 class="text-center">Update book informations</h1>
 
-    <form class="mt-5" action="{{ route('update-store-books', $book->id) }}" method="POST">
+    <form class="mt-5" action="{{ route('update-store-books', $book->id) }}" method="post">
         @csrf
         <ul class="form-style-1">
             <li>

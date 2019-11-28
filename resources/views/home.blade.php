@@ -14,10 +14,17 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    You are logged in! <br>
+                    You will be redirected to the home page in a few moment...
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script type="application/javascript">
+    setTimeout(function (){
+        window.location.href = "{{ route('welcome') }}";
+    }, 3000)
+</script>
 @endsection

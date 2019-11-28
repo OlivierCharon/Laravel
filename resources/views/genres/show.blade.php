@@ -26,28 +26,26 @@
         <tr>
             <th scope="col">ID</th>
             <th scope="col">Name</th>
-            <th scope="col">Author</th>
-            <th scope="col">Genre</th>
+            <th scope="col">Desc</th>
             @auth
                 <th scope="col">Actions</th>
             @endauth
         </tr>
         </thead>
         <tbody>
-        @foreach($books as $book)
+        @foreach($genres as $genre)
             <tr>
-                <td>{{ $book->id  }}</td>
-                <td>{{ $book->name  }}</td>
-                <td>{{ $book->author  }}</td>
-                <td>{{ $book->genre->name  }}</td>
+                <td>{{ $genre->id  }}</td>
+                <td>{{ $genre->name  }}</td>
+                <td>{{ $genre->description  }}</td>
                 @auth
                     <td class="actions">
-                        <form action="{{ route('update-books', $book->id) }}" method="POST">
+                        <form action="{{ route('update-genres', $genre->id) }}" method="POST">
                             @csrf
                             <button class="btn btn-info" type="submit">Edit</button>
                         </form>
 
-                        <form action="{{ route('delete-books', $book->id) }}" method="POST">
+                        <form action="{{ route('delete-genres', $genre->id) }}" method="POST">
                             @csrf
                             <button class="btn btn-danger" type="submit">X</button>
                         </form>

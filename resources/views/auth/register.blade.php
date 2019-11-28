@@ -61,6 +61,15 @@
                             </div>
                         </div>
 
+                        <div>
+                            <label for="right_id">Genre</label>
+                            <select id="right_id" name="right_id" class="field-select">
+                                @foreach($rights as $right)
+                                    <option value="{{$right->id}}">{{ $right->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
